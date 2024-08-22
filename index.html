@@ -10,10 +10,13 @@
         window.addEventListener('message', function(event) {
           try{
             var data = JSON.parse(event.data);
+            console.log('Data1:',data);
             if(data.event === 'analytic'){
-              console.log('Data:',data.data);
+              console.log('Data2:',data.data);
             }
-          }catch(){}
+          }catch(){
+            console.log('Data: Error');
+          }
         });
       window.dataLayer = window.dataLayer || [];
       function gtag() {
