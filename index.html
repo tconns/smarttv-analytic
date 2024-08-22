@@ -26,8 +26,8 @@
       // Hàm để gửi client_id lên parent window
       function sendClientId() {
         if (!clientId || sended) return;  // Đảm bảo chỉ gửi một lần
-        window.parent.postMessage(JSON.stringify({event:'client_id', data: clientId }), '*');
         sended = true;
+        window.parent.postMessage(JSON.stringify({event:'client_id', data: clientId }), '*');
       }
 
       // Kiểm tra và gửi client_id khi trang tải xong
