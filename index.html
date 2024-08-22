@@ -19,6 +19,7 @@
       // Lấy client_id từ Google Analytics
       gtag("get", "G-7HWRG1H42Y", "client_id", function(client_id){
         if (clientId || sended) return;  // Nếu đã có clientId hoặc đã gửi thì dừng lại
+        console.log("clientId", client_id, clientId, sended);
         clientId = client_id;
         sendClientId(); // Gửi client_id
       });
