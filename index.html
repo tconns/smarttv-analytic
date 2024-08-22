@@ -8,14 +8,19 @@
     <script>
       // Lắng nghe sự kiện message từ parent
         window.addEventListener('message', function(event) {
-          try{
-            var data = JSON.parse(event.data);
-            console.log('Data1:',data);
-            if(data.event === 'analytic'){
-              console.log('Data2:',data.data);
-            }
-          }catch(){
-            console.log('Data: Error');
+          try {
+              // Kiểm tra xem event.data có phải là một chuỗi không
+              if (typeof event.data === 'string') {
+                  var data = JSON.parse(event.data);
+                  console.log('Data1:', data);
+                  if (data.event === 'analytic') {
+                      console.log('Data2:', data.data);
+                  }
+              } else {
+                  console.log('Data: Not a string');
+              }
+          } catch (error) {
+              console.log('Data: Error', error);
           }
         });
       window.dataLayer = window.dataLayer || [];
