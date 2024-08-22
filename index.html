@@ -6,23 +6,6 @@
       src="https://www.googletagmanager.com/gtag/js?id=G-1JJF66DMPF"
     ></script>
     <script>
-      // Lắng nghe sự kiện message từ parent
-        window.addEventListener('message', function(event) {
-          try {
-              // Kiểm tra xem event.data có phải là một chuỗi không
-              if (typeof event.data === 'string') {
-                  var data = JSON.parse(event.data);
-                  console.log('Data1:', data);
-                  if (data.event === 'analytic') {
-                      console.log('Data2:', data.data);
-                  }
-              } else {
-                  console.log('Data: Not a string');
-              }
-          } catch (error) {
-              console.log('Data: Error', error);
-          }
-        });
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
@@ -33,6 +16,26 @@
       gtag("get", "G-1JJF66DMPF", "client_id", function(client_id){
         console.log(client_id)
       });
+      // Lắng nghe sự kiện message từ parent
+        window.addEventListener('message', function(event) {
+          try {
+              // Kiểm tra xem event.data có phải là một chuỗi không
+              if (typeof event.data === 'string') {
+                  var data = JSON.parse(event.data);
+                  if (data.event === 'analytic') {
+                    gtag('event', 'analytic', {
+                        'event_category': 'analytic_category',  // Thay thế bằng tên danh mục bạn muốn
+                        'event_label': 'analytic_label',        // Thay thế bằng nhãn bạn muốn
+                        'value': data.data                  // Dữ liệu bạn muốn truyền
+                    });
+                  }
+              } else {
+                  console.log('Data: Not a string');
+              }
+          } catch (error) {
+              console.log('Data: Error', error);
+          }
+        });
     </script>
   </head>
   <body>
