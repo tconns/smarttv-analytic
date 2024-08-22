@@ -6,6 +6,15 @@
       src="https://www.googletagmanager.com/gtag/js?id=G-1JJF66DMPF"
     ></script>
     <script>
+      // Lắng nghe sự kiện message từ parent
+        window.addEventListener('message', function(event) {
+          console.log('Data:',event.origin, event.data);
+            // Bạn có thể kiểm tra nguồn gốc của message để đảm bảo tính bảo mật
+            // if (event.origin !== 'http://your-parent-domain.com') return;
+
+            // Xử lý message
+            //document.getElementById('message').innerText = 'Received message: ' + event.data;
+        });
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
