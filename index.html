@@ -12,21 +12,27 @@
       }
       gtag("js", new Date());
       gtag("config", "G-7HWRG1H42Y");
-      console.log(window, window.gaGlobal);
+
       var clientId = '';
       var sended = false;
+
+      // Lấy client_id từ Google Analytics
       gtag("get", "G-7HWRG1H42Y", "client_id", function(client_id){
+        if (clientId || sended) return;  // Nếu đã có clientId hoặc đã gửi thì dừng lại
         clientId = client_id;
-        if(sended) return;
-          window.parent.postMessage(JSON.stringify({event:'client_id', data: clientId }), '*');
-         sended = true;
+        sendClientId(); // Gửi client_id
       });
-      window.onload = function(){
-        if(sended) return;
-        if(clientId){
-          window.parent.postMessage(JSON.stringify({event:'client_id', data: clientId }), '*');
-          sended = true;
-        }
+
+      // Hàm để gửi client_id lên parent window
+      function sendClientId() {
+        if (!clientId || sended) return;  // Đảm bảo chỉ gửi một lần
+        window.parent.postMessage(JSON.stringify({event:'client_id', data: clientId }), '*');
+        sended = true;
+      }
+
+      // Kiểm tra và gửi client_id khi trang tải xong
+      window.onload = function() {
+        sendClientId();
       };
     </script>
   </head>
