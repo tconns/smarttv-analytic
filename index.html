@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-1JJF66DMPF"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-1JJF66DMPF");
+      console.log(window, window.gaGlobal)
+      gtag("get", "G-1JJF66DMPF", "client_id", function(client_id){
+        console.log(client_id)
+      });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
