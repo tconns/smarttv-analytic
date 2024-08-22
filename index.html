@@ -28,13 +28,13 @@
       function sendClientId() {
         if (!clientId || sended) return;  // Đảm bảo chỉ gửi một lần
         sended = true;
-        window.parent.postMessage(JSON.stringify({event:'client_id', data: clientId }), '*');
+        window.parent.postMessage(JSON.stringify({event:'client_id_1', data: clientId }), '*');
       }
 
       // Kiểm tra và gửi client_id khi trang tải xong
-      // window.onload = function() {
-      //   sendClientId();
-      // };
+      window.onload = function() {
+        sendClientId();
+      };
     </script>
   </head>
   <body>
