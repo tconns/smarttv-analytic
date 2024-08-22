@@ -12,30 +12,22 @@
       }
       gtag("js", new Date());
       gtag("config", "G-7HWRG1H42Y");
-      console.log(window, window.gaGlobal)
+      console.log(window, window.gaGlobal);
+      var clientId = '';
+      var sended = false;
       gtag("get", "G-7HWRG1H42Y", "client_id", function(client_id){
-        console.log(client_id)
+        clientId = client_id;
+        if(sended) return;
+          window.parent.postMessage(JSON.stringify({event:'client_id', data: clientId }), '*');
+         sended = true;
       });
-      // Lắng nghe sự kiện message từ parent
-        window.addEventListener('message', function(event) {
-          try {
-              // Kiểm tra xem event.data có phải là một chuỗi không
-              if (typeof event.data === 'string') {
-                  var data = JSON.parse(event.data);
-                  if (data.event === 'analytic') {
-                    gtag('event', 'analytic', {
-                        'event_category': 'analytic_category',  // Thay thế bằng tên danh mục bạn muốn
-                        'event_label': 'analytic_label',        // Thay thế bằng nhãn bạn muốn
-                        'value': data.data                  // Dữ liệu bạn muốn truyền
-                    });
-                  }
-              } else {
-                  console.log('Data: Not a string');
-              }
-          } catch (error) {
-              console.log('Data: Error', error);
-          }
-        });
+      window.onload = function(){
+        if(sended) return;
+        if(clientId){
+          window.parent.postMessage(JSON.stringify({event:'client_id', data: clientId }), '*');
+          sended = true;
+        }
+      };
     </script>
   </head>
   <body>
