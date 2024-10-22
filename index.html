@@ -1,41 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-7HWRG1H42Y"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-7HWRG1H42Y");
-
-      var clientId = '';
-      var sended = false;
-
-      // Lấy client_id từ Google Analytics
-      gtag("get", "G-7HWRG1H42Y", "client_id", function(client_id){
-        if (clientId || sended) return;  // Nếu đã có clientId hoặc đã gửi thì dừng lại
-        console.log("clientId", client_id, clientId, sended);
-        clientId = client_id;
-        sendClientId(); // Gửi client_id
-      });
-
-      // Hàm để gửi client_id lên parent window
-      function sendClientId() {
-        if (!clientId || sended) return;  // Đảm bảo chỉ gửi một lần
-        sended = true;
-        window.parent.postMessage(JSON.stringify({event:'client_id_1', data: clientId }), '*');
-      }
-
-      // Kiểm tra và gửi client_id khi trang tải xong
-      window.onload = function() {
-        sendClientId();
-      };
-    </script>
   </head>
   <body>
   </body>
